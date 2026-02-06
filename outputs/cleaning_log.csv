@@ -1,0 +1,4 @@
+action,column,method,reason,ratio
+filled_missing_values,age,median,deterministic missing value handling,
+filled_missing_values,city,mode,deterministic missing value handling,
+flag_high_missingness,bad_col,,missing values exceed 40%,0.6666666666666666
