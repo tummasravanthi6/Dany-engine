@@ -1,0 +1,9 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Outputs
+outputs/
+
+# OS
+.DS_Store
