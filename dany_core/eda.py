@@ -1,9 +1,17 @@
+# eda.py
+"""
+EDA Engine for DANY
+Provides profiling of numerical, categorical, and target columns.
+"""
+
 import pandas as pd
 import numpy as np
 from scipy.stats import skew
 
-
 def profile_numerical_columns(df: pd.DataFrame, target_col: str | None = None) -> dict:
+    """
+    Generate basic statistics for numerical columns.
+    """
     profiles = {}
     num_cols = df.select_dtypes(include=[np.number]).columns
 
@@ -26,9 +34,12 @@ def profile_numerical_columns(df: pd.DataFrame, target_col: str | None = None) -
         }
 
     return profiles
-def profile_categorical_columns(df: pd.DataFrame) -> dict:
-    profiles = {}
 
+def profile_categorical_columns(df: pd.DataFrame) -> dict:
+    """
+    Generate basic statistics for categorical columns.
+    """
+    profiles = {}
     cat_cols = df.select_dtypes(include=["object", "category"]).columns
 
     for col in cat_cols:
@@ -42,10 +53,14 @@ def profile_categorical_columns(df: pd.DataFrame) -> dict:
         }
 
     return profiles
+
 def profile_target(df: pd.DataFrame, target_col: str) -> dict:
+    """
+    Determine task type (classification/regression) and profile target column.
+    """
     series = df[target_col].dropna()
 
-    # Classification detection
+    # Classification detection: object or small number of unique values
     if series.dtype == "object" or series.nunique() <= 20:
         counts = series.value_counts(normalize=True)
 
@@ -62,4 +77,3 @@ def profile_target(df: pd.DataFrame, target_col: str) -> dict:
         "std": float(series.std(ddof=1)),
         "skewness": float(skew(series)),
     }
-

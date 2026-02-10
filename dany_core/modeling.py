@@ -274,3 +274,6 @@ def _select_best_model(results, task_type):
         "model_name": sorted_results[0]["model_name"],
         "metrics": sorted_results[0]["metrics"],
     }
+# Alias for runner.py
+run_modeling = train_and_evaluate
+

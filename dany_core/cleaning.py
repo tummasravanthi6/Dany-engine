@@ -85,3 +85,12 @@ def _cap_outliers(df: pd.DataFrame):
             df[col] = df[col].clip(lower, upper)
             steps.append({"action": "capped_outliers", "column": col, "method": "IQR", "reason": "extreme values detected"})
     return df, steps
+
+
+
+def run_cleaning(df):
+    """
+    Pipeline entrypoint for cleaning stage.
+    Must return cleaned_df and cleaning_steps.
+    """
+    return clean_data(df)
